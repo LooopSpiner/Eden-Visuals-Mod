@@ -4,6 +4,16 @@
 <br>
 交流群：390135062，若遇到bug或想要提交意见可以进群讨论
 
+<details><summary><b>展开查看图片</b></summary>
+ 
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/01.png)
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/02.png)
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/03.png)
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/04.png)
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/05.png)
+
+</details>
+
 <b>请先安装前置模组[**简易框架**](https://github.com/emicoto/SCMLSimpleFramework)！！！</b>
 
 安装顺序为：
