@@ -1,0 +1,973 @@
+{
+    "name": "伊甸头像互动",
+    "version": "1.0.0",
+    "styleFileList": [
+        "game/edenCG.css"
+    ],
+    "scriptFileList": [
+        "game/edenCG_function.js",
+        "game/edenCG_sf.js"
+    ],
+    "tweeFileList": [
+        "game/eden_widget.twee"
+    ],
+    "imgFileList": [
+        "img/misc/edenCG/default/body/body_black.png",
+        "img/misc/edenCG/default/body/body_white.png",
+        "img/misc/edenCG/default/body/hair.png",
+        "img/misc/edenCG/default/clothes/hurt.png",
+        "img/misc/edenCG/default/clothes/jacket.png",
+        "img/misc/edenCG/default/clothes/outside.png",
+        "img/misc/edenCG/default/clothes/indoor.png",
+        "img/misc/edenCG/default/clothes/scarf.png",
+        "img/misc/edenCG/default/face/angry.png",
+        "img/misc/edenCG/default/face/default.png",
+        "img/misc/edenCG/default/face/gdom.png",
+        "img/misc/edenCG/default/face/happy.png",
+        "img/misc/edenCG/default/face/proud.png",
+        "img/misc/edenCG/default/face/sad.png",
+        "img/misc/edenCG/default/face/shy.png",
+        "img/misc/edenCG/default/face/confuse.png",
+        "img/misc/edenCG/default/face/terrible.png",
+        "img/misc/edenCG/default/face/close_white.png",
+        "img/misc/edenCG/default/face/close_black.png",
+        "img/misc/edenCG/default/face/close_angry.png",
+        "img/misc/edenCG/default/face/worried.png",
+        "img/misc/edenCG/default/face/awkward.png",
+        "img/misc/edenCG/default/face/raisedEyebrows.png",
+        "img/misc/edenCG/default/background/angry.png",
+        "img/misc/edenCG/default/background/default.png",
+        "img/misc/edenCG/default/background/gdom.png",
+        "img/misc/edenCG/default/background/happy.png",
+        "img/misc/edenCG/default/background/proud.png",
+        "img/misc/edenCG/default/background/sad.png",
+        "img/misc/edenCG/default/background/confuse.png",
+        "img/misc/edenCG/default/background/shy.png",
+        "img/misc/edenCG/default/background/raisedEyebrows.png",
+        "img/misc/edenCG/default/background/unknown.png",
+        "img/misc/edenCG/default/background/terrible.png",
+        "img/misc/edenCG/default/background/worried.png",
+        "img/misc/edenCG/default/background/awkward.png",
+        "img/misc/edenCG/default/foreground/default.png",
+        "img/misc/edenCG/default/foreground/unknown.png",
+        "img/misc/edenCG/night/foreground.png",
+        "img/misc/edenCG/night/eden_white.png",
+        "img/misc/edenCG/night/eden_black.png",
+        "img/misc/edenCG/night/heart1.png",
+        "img/misc/edenCG/night/heart2.png",
+        "img/misc/edenCG/night/breathe2.png",
+        "img/misc/edenCG/night/breathe1.png",
+        "img/misc/edenCG/night/pc/long.png",
+        "img/misc/edenCG/night/pc/feet.png",
+        "img/misc/edenCG/night/pc/short.png",
+        "img/misc/edenCG/night/pc/middle.png",
+        "img/misc/edenCG/night/pc/body.png",
+        "img/misc/edenCG/night/pc/left_eye.png",
+        "img/misc/edenCG/night/pc/right_eye.png",
+        "img/misc/edenCG/night/pc/shirt.png",
+        "img/misc/edenCG/night/background.png",
+        "img/misc/edenCG/wound/foreground.png",
+        "img/misc/edenCG/wound/eden_white.png",
+        "img/misc/edenCG/wound/eden_black.png",
+        "img/misc/edenCG/wound/pc/long.png",
+        "img/misc/edenCG/wound/pc/feet.png",
+        "img/misc/edenCG/wound/pc/short.png",
+        "img/misc/edenCG/wound/pc/middle.png",
+        "img/misc/edenCG/wound/pc/body.png",
+        "img/misc/edenCG/wound/pc/left_eye.png",
+        "img/misc/edenCG/wound/pc/right_eye.png",
+        "img/misc/edenCG/wound/pc/shirt.png",
+        "img/misc/edenCG/wound/background.png"
+    ],
+    "additionFile": [
+    ],
+    "addonPlugin": [
+    {
+        "modName": "ModLoader DoL ImageLoaderHook",
+        "addonName": "ImageLoaderAddon",
+        "modVersion": "2.0.0"
+      },
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+          {
+            "passage": "Widgets Forest",
+            "findString": "Forest Hunter Molestation]]>><<set $molestationstart to 1>><</link>>",
+            "replace": "Forest Hunter Molestation]]>><<set $molestationstart to 1>><</link>><br><<edenCG>>",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Hunter Intro",
+            "findString": "<br><br>\n\n\t<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link ",
+            "_comment": "哥斯拉耳膜初遇",
+            "all":true
+          },
+          {
+            "passage": "Forest Hunter Nod",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Cabin Food",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Cabin Spit",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Cabin Weaken",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Cabin Good",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Bath Refuse",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Cuddle",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Night Sleep",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Leash Broken",
+            "findString": "<br><br>\n\n<<if C.npc.Eden.trust gte 100>>\n\t<<link",
+            "replace": "<br><br>\n\n<<edenCG>><br><<if C.npc.Eden.trust gte 100>>\n\t<<link",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Night Leash",
+            "findString": "Forest Cabin]]>><<endevent>><</link>>",
+            "replace": "Forest Cabin]]>><<endevent>><</link>><br><<edenCG>>",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Cabin Bath",
+            "findString": "<br><br>\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Cabin",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><br><<edenCG>><br>\n</div>",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Forest Hunter Refuse",
+            "findString": "<br><br>\n\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "哥斯拉耳膜初遇"
+          },
+          {
+            "passage": "Eden Dinner",
+            "findString": "<br><br>\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "一起吃饭"
+          },
+          {
+            "passage": "Eden Dinner",
+            "findString": "<br><br>\n\n\t<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "拒绝一起"
+          },
+          {
+            "passage": "Eden Story",
+            "findString": "<br><br>\n<<link [[",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link [[",
+            "_comment": "鬼故事"
+          },
+          {
+            "passage": "Eden Story Begins",
+            "findString": "<br><br>\n<<link [[",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link [[",
+            "_comment": "鬼故事开头"
+          },
+          {
+            "passage": "Eden Story Continues",
+            "findString": "<br><br>\n<<link [[",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link [[",
+            "_comment": "鬼故事继续"
+          },
+          {
+            "passage": "Eden Story Decline",
+            "findString": "<br><br>\n<<link ",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link ",
+            "_comment": "鬼故事拒绝"
+          },
+          {
+            "passage": "Eden Bath",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath",
+            "findString": "<br><br>\n\n\t\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "洗澡",
+            "all":true
+          },
+          {
+            "passage": "Eden Bath 2",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>>\n<<edenCG>></div>",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Wash Intro",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Wash Intro 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Wash Intro 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Join",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Wash",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Wash No",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n<<link",
+            "_comment": "洗澡"
+          },
+          {
+            "passage": "Eden Bath Seduction",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "洗澡",
+            "all":true
+          },
+          {
+            "passage": "Eden Breakfast Push",
+            "findString": "<br><br>\n\t<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "早饭拒绝色色",
+            "all":true
+          },
+          {
+            "passage": "Eden Breakfast 2",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><br><<edenCG>>\n</div>",
+            "_comment": "早饭"
+          },
+          {
+            "passage": "Eden Read Tease",
+            "findString": "<br><br>\n<<if",
+            "replace": "<br><br><<edenCG>><br>\n<<if",
+            "_comment": "看书挑逗"
+          },
+          {
+            "passage": "Eden Read",
+            "findString": "<br><br>\n<<if",
+            "replace": "<br><br><<edenCG>><br>\n<<if",
+            "_comment": "看书挑逗"
+          },
+          {
+            "passage": "Eden Read Insist",
+            "findString": "<br><br>\n\n<<if",
+            "replace": "<br><br><<edenCG>><br>\n<<if",
+            "_comment": "看书挑逗"
+          },
+          {
+            "passage": "Eden Cabin",
+            "findString": "<<foodicon \"pancakes\">><<link",
+            "replace": "<<edenCG>><br><<foodicon \"pancakes\">><<link",
+            "_comment": "早餐"
+          },
+          {
+            "passage": "Eden Dance",
+            "findString": "<br><br>\n<<if Time.hour isnot 0>>",
+            "replace": "<br><br><<edenCG>><br>\n<<if Time.hour isnot 0>>",
+            "_comment": "跳舞"
+          },
+          {
+            "passage": "Eden Radio Intro",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "跳舞"
+          },
+          {
+            "passage": "Eden Radio Intro 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "跳舞"
+          },
+          {
+            "passage": "Eden Radio Intro 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "跳舞"
+          },
+          {
+            "passage": "Eden Radio Intro 4",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "跳舞"
+          },
+          {
+            "passage": "Eden Dance Seduce",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "跳舞",
+            "all": true
+          },
+          {
+            "passage": "Eden Forest Lake",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Forest Lake 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Lake Walk",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Stand",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Take Hand",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Lake Push",
+            "findString": "<br><br>\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边散步",
+            "all": true
+          },
+          {
+            "passage": "Eden Lake",
+            "findString": "<</if>>\n</div",
+            "replace": "<</if>><<edenCG>><br>\n</div",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Lake Raft",
+            "findString": "<</if>>\n\n<<link",
+            "replace": "<</if>><<edenCG>><br>\n<<link",
+            "_comment": "湖边散步"
+          },
+          {
+            "passage": "Eden Cuddle Trauma Nod",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "聊天"
+          },
+          {
+            "passage": "Eden View",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "湖边"
+          },
+          {
+            "passage": "Eden Cuddle Trauma Honest",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "聊天"
+          },
+          {
+            "passage": "Eden Cuddle Trauma Honest 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "聊天"
+          },
+          {
+            "passage": "Eden Cuddle Trauma Honest 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "聊天"
+          },
+          {
+            "passage": "Eden Cuddle Talk",
+            "findString": "<</if>>\n<br><br>",
+            "replace": "<</if>>\n<br><<edenCG>><br><br>",
+            "_comment": "聊天"
+          },
+          {
+            "passage": "Eden Collar",
+            "findString": "<</if>>\n\n<<link",
+            "replace": "<</if>><br><<edenCG>><br>\n\n<<link",
+            "_comment": "支配恶魔发力了"
+          },
+          {
+            "passage": "Eden Collar Ask 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "支配恶魔发力了"
+          },
+          {
+            "passage": "Eden Collar Ask 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "支配恶魔发力了"
+          },
+          {
+            "passage": "Eden Christmas Meal",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "圣诞节"
+          },
+          {
+            "passage": "Eden Christmas Meal 2",
+            "findString": "<br><br>\n\n<<if playerIsPregnant() and playerAwareTheyArePregnant()>>",
+            "replace": "<br><br><<edenCG>><br>\n\n<<if playerIsPregnant() and playerAwareTheyArePregnant()>>",
+            "_comment": "圣诞节"
+          },
+          {
+            "passage": "Eden Christmas Meal 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "圣诞节"
+          },
+          {
+            "passage": "Eden Christmas Meal 4",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "圣诞节"
+          },
+          {
+            "passage": "Eden Christmas Turn",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "圣诞节"
+          },
+          {
+            "passage": "Eden Chimney",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "pc掏烟囱(你是圣诞老人吗)"
+          },
+          {
+            "passage": "Eden Chimney Push",
+            "findString": "<br><br>\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "pc掏烟囱(你是圣诞老人吗)"
+          },
+          {
+            "passage": "Eden Wounds Finish",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds Salve",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds Relent",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds Nod",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds No Kiss",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Wounds Insist",
+            "findString": "<br><br>\n\n<<if $salve gte 1>>",
+            "replace": "<br><br><<edenCG>><br>\n\n<<if $salve gte 1>>",
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Firewood Refuse",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "all":true,
+            "_comment": "受伤"
+          },
+          {
+            "passage": "Eden Cuddle",
+            "findString": "<</if>>\n\t<br><br>",
+            "replace": "<</if>>\n\t<br><br><<edenCG>><br>",
+            "_comment": "依偎"
+          },
+          {
+            "passage": "Eden Cuddle",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "依偎"
+          },
+          {
+            "passage": "Eden Cuddle Trauma Talk",
+            "findString": "<br><br>\n\n<<if Time.hour isnot 0>>",
+            "replace": "<br><br><<edenCG>><br>\n\n<<if Time.hour isnot 0>>",
+            "_comment": "依偎"
+          },
+          {
+            "passage": "Eden Clearing",
+            "findString": "<</if>>\n\t\t\t\t<br><br>\n\n\t\t\t\t<<link",
+            "replace": "<</if>>\n\t\t\t\t<br><br><<edenCG>><br>\n\n\t\t\t\t<<link",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Clearing",
+            "findString": "<br><br>\n\n\t\t\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t\t\t<<link",
+            "_comment": "受伤和斧子",
+            "all":true
+          },
+          {
+            "passage": "Eden Carve",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "万圣节！万圣节！万圣节！万圣节！万圣节！"
+          },
+          {
+            "passage": "Eden Carve 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "万圣节！万圣节！万圣节！万圣节！万圣节！"
+          },
+          {
+            "passage": "Eden Carve 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "万圣节！万圣节！万圣节！万圣节！万圣节！"
+          },
+          {
+            "passage": "Eden Carve 4",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "万圣节！万圣节！万圣节！万圣节！万圣节！"
+          },
+          {
+            "passage": "Eden Carve 5",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "万圣节！万圣节！万圣节！万圣节！万圣节！"
+          },
+          {
+            "passage": "Eden Sweets",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets Refuse",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets Lick",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets Pull Away",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets Lick Refuse",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Sweets 6",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "巧克力！巧克力！巧克力！巧克力！巧克力！"
+          },
+          {
+            "passage": "Eden Valentines Wash",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Wash Nod",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Relax",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Read",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Push",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Listen",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Distract",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Distract Push",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Dance",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Dance 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Dance 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Book",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Book Refuse",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Book 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Book 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Bath 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Valentines Bath 3",
+            "findString": "<br><br>\n\n<<if $edenradiointro is 2>>",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<if $edenradiointro is 2>>",
+            "_comment": "情人节"
+          },
+          {
+            "passage": "Eden Search",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "搜寻森林"
+          },
+          {
+            "passage": "Eden Forest Search",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><br><<edenCG>><br>\n</div>",
+            "_comment": "搜寻森林"
+          },
+          {
+            "passage": "Eden Hunting",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><br><<edenCG>><br>\n</div>",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Hunt 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Hunt Molestation Finish",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Hunt Snake Finish",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Hunt Wolf Finish",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "打猎"
+          },
+          {
+            "passage": "Eden Shoot Ask",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "射击"
+          },
+          {
+            "passage": "Eden Shoot First Focus",
+            "findString": "<br><br>\n<<if Time.hour isnot 0>>",
+            "replace": "<br><br><<edenCG>><br>\n<<if Time.hour isnot 0>>",
+            "_comment": "射击"
+          },
+          {
+            "passage": "Eden Shoot Focus",
+            "findString": "<br><br>\n\n<<if Time.hour isnot 0>>",
+            "replace": "<br><br><<edenCG>><br>\n<<if Time.hour isnot 0>>",
+            "_comment": "射击"
+          },
+          {
+            "passage": "Eden Shoot Sex Refuse",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "射击"
+          },
+          {
+            "passage": "Eden Shoot",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><br><<edenCG>><br>\n</div>",
+            "_comment": "射击"
+          },
+          {
+            "passage": "Eden Shoot Rub",
+            "findString": "<br><br>\n\n\t<<if",
+            "replace": "<br><br><<edenCG>><br>\n<<if",
+            "_comment": "射击",
+            "all":true
+          },
+          {
+            "passage": "Eden Supplied 2",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><<edenCG>><br>\n</div>",
+            "_comment": "来骗来偷袭"
+          },
+          {
+            "passage": "Eden Spring",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Seduce",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水",
+            "all":true
+          },
+          {
+            "passage": "Eden Spring Splash",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro Seduce",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro Cuddle",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro Cuddle 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro 3",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring Intro 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Spring 2",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "一起泡泉水"
+          },
+          {
+            "passage": "Eden Cabin Rescued",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "你醒了？你已经是一个女孩子了"
+          },
+          {
+            "passage": "Eden Cabin Passout",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br><<edenCG>><br>\n\n<<link",
+            "_comment": "你醒了？你已经是一个女孩子了"
+          },
+          {
+            "passage": "Eden Caged Intro",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Caught",
+            "findString": "<br><br>\n\n<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Caught Pull",
+            "findString": "<<pain 4>><<gpain>>\n\t<br><br>\n\n\t<<link",
+            "replace": "<<pain 4>><<gpain>>\n\t<br><br><<edenCG>><br>\n\n\t<<link",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Breakfast",
+            "findString": "<br><br>\n\n\t<<if $edenCaged.escape gte 9>>",
+            "replace": "<br><br><<edenCG>><br>\n\n\t<<if $edenCaged.escape gte 9>>",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Evening",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Breakfast",
+            "findString": "<br><br>\n\n\t<<link",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<link",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged Evening",
+            "findString": "<br><br>\n\n\t<<if $edenCaged.escape gte 9>>",
+            "replace": "<br><br>\n<<edenCG>><br>\n\t<<if $edenCaged.escape gte 9>>",
+            "_comment": "这个小盒是你永远的家"
+          },
+          {
+            "passage": "Eden Caged",
+            "findString": "<</if>>\n</div>",
+            "replace": "<</if>><<edenCG>><br>\n</div>",
+            "_comment": "这个小盒是你永远的家"
+          }
+
+        ]
+       }
+    ],
+    "dependenceInfo": [
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "version": "^2.0.0"
+    }
+    ]
+  }

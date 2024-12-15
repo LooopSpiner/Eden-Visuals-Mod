@@ -1,0 +1,350 @@
+:: edenCG Widget [widget]
+<<widget "edenCG">>
+
+<<set $outsidePassages to ['Eden Clearing','Clearing Weeding','Clearing Eden Actions','Eden Porch','Clearing Spring','Eden Plots','Clearing Fondle','Eden Lunch',"Eden Shoot","Eden Shoot First Focus","Eden Shoot Focus"]>>
+<<set $indoorPassages to ["Forest Hunter Refuse" ,"Forest Hunter Nod","Forest Hunter Intro",'Eden Cabin','Eden Bath 2','Eden Bath','Eden Bath Wash No','Eden Bath Wash','Eden Breakfast','Eden Breakfast 2','Eden Dinner','Eden Christmas Meal 2','Eden Read','Eden Read Tease','Eden Table','Eden Cabin Bed','Cabin Sleep','Eden Mirror','Eden Caged Intro','Eden Caged','Eden Caged Caught','Eden Caged Evening','Eden Sleep Push','Cabin Eden Actions','Eden Cuddle','Eden Cuddle Talk','Eden Cuddle Trauma Talk','Eden Caged Breakfast','Eden Caged Escape','Eden Caged Freedom','Eden Dance','Eden Wounds','Eden Wounds Insist','Eden Wounds Finish','Eden Cuddle Trauma Honest','Eden Cuddle Trauma Honest 2','Eden Cuddle Trauma Honest 3']>>
+<<set $bathPassages to ['Cabin Bath Refuse','Cabin Bath','Eden Valentines Wash','Eden Valentines Bath','Eden Valentines Bath 2','Eden Valentines Bath 3','Eden Valentines Wash Nod','Eden Valentines Relax','Eden Spring','Eden Spring Intro','Eden Spring Intro Cuddle 2','Eden Spring Intro 2','Eden Spring 2','Eden Spring Intro 3','Eden Spring Splash','Eden Spring Intro Cuddle','Eden Spring Seduce',"Eden Bath Wash No","Eden Bath","Eden Bath 2","Eden Bath Wash","Eden Bath Wash Intro","Eden Bath Wash Intro 2","Eden Bath Wash Intro 3","Eden Bath Join","Eden Bath Seduction"]>>
+
+<div id = "parentDiv">
+    <div id = "touch">
+       <div id = "touchFace"></div>
+       <div id = "touchChest"></div>
+   </div>
+   <div id = "edenCG"></div>
+   
+</div>
+
+<!--处理伊甸表情代码块-->
+<<if ($edenBedCheck && $edenbed) || ['Eden Take Hand',"Eden Read"].includes($passage)>>
+    <<set $edenFace to "default">>
+<<elseif ['Eden Stand',"Eden Cuddle Trauma Talk",'Eden Cuddle Trauma Honest','Eden Cuddle Trauma Honest 3'].includes($passage)>>
+    <<set $edenFace to "sad">>
+
+<<elseif ["Forest Hunter Refuse",'Eden Hunt Molestation Finish','Eden Hunt Snake Finish','Eden Hunt Wolf Finish'].includes($passage)
+|| ($passage == "Forest Hunter Intro" && $hunterintro && !$hunterIntroCheck)
+|| ($passage == "Eden Bath" && $phase == 1 && C.npc.Eden.love lt 1)
+|| ($passage == 'Eden Caged Breakfast' && !$phase is 1)
+|| ($passage == 'Eden Supplied 2' && ![1,0].includes($phase) && $skulduggerysuccess is 1)
+|| (($edenfreedom is 2 and $edendaysCheck gte 8 and Time.hour gte 0 and Time.hour lte 6) or ($edenfreedom is 1 and $edendaysCheck gte 2 and Time.hour gte 0 and Time.hour lte 6) and !$possessed && $edenPreyEscapedCheck && !$edenPreyEscaped && $edendays == 0 && $passage == "Eden Cabin")>>
+    <<set $edenFace to "angry">>
+
+<<elseif ["Eden Story","Eden Story Begins",'Eden Christmas Meal'].includes($passage)
+|| ($passage == "Eden Caged Evening" && $phase is 1)
+|| ($passage == 'Eden Caged Breakfast' && $phase is 1)>>
+    <<set $edenFace to "proud">>
+
+<<elseif ($passage == "Eden Dinner" && $phase is 1)
+|| ($passage == "Eden Bath 2" && $phase is 3)
+|| ($passage == "Eden Breakfast" && $phase is 3)
+|| ($passage == 'Eden Hunt 3' && $phase is 0)
+|| ['Forest Cabin Food','Eden Wounds Insist','Eden Wounds Relent','Eden Valentines Bath 2','Eden Valentines Book','Eden Valentines Book 3','Eden Valentines Dance 3','Eden Valentines Push','Eden Valentines Listen','Eden Valentines Relax','Eden Valentines Wash Nod','Eden Spring Intro 2','Eden Spring Intro Seduce','Eden Sweets Lick Refuse','Eden Sweets 6','Eden Sweets Pull Away','Eden Sweets Refuse','Eden Carve 3','Eden Carve 4','Eden Christmas Meal 3','Eden Christmas Meal 4','Eden Collar',"Eden Bath Wash Intro","Eden Bath Wash Intro 2","Eden Bath Wash Intro 3",'Eden Radio Intro 4','Eden View','Eden Lake Raft','Eden Cuddle Talk'].includes($passage)>>
+    <<set $edenFace to "happy">>
+
+<<elseif ($passage == "Eden Dinner" && $phase is 2)
+|| ['Eden Cabin Rescued','Eden Cabin Passout','Eden Cuddle Trauma Nod','Eden Cuddle Trauma Honest 2','Eden Chimney Push'].includes($passage)
+|| (($edenfreedom is 2 and $edendaysCheck gte 8 and Time.hour gte 0 and Time.hour lte 6) or ($edenfreedom is 1 and $edendaysCheck gte 2 and Time.hour gte 0 and Time.hour lte 6) and !$possessed && $edendays == 0 && $passage == "Eden Cabin")>>
+    <<set $edenFace to "worried">>
+
+<<elseif ["Eden Caged Intro",'Eden Caged Caught'].includes($passage)
+|| ($edenCagedEscape and Time.hour gte 0 and Time.hour lte 6 and !$possessed && $passage == "Eden Cabin")
+|| (!$physiqueSuccess && $passage == 'Eden Caged Caught Pull')>>
+    <<set $edenFace to "terrible">>
+
+<<elseif ["Eden Bath Join"].includes($passage)>>
+    <<set $edenFace to "raisedEyebrows">>
+
+<<elseif ['Cabin Leash Broken',"Eden Pillows",'Eden Christmas Meal 2','Eden Christmas Turn','Eden Freedom','Eden Radio Intro','Eden Carve','Eden Carve 5','Eden Shoot Ask','Eden Search'].includes($passage)
+|| ($passage == "Eden Bath 2" && !$phase)
+|| ($passage == "Eden Breakfast" && $phase is 0 && !$housekeepingSuccess && $daily.eden.breakfastLust)
+|| ($passage == "Eden Lake" && !$exposed gte 1 && $edenraftintro is 1)>>
+    <<set $edenFace to "confuse">>
+
+<<elseif ["Eden Story Decline","Eden Breakfast Push",'Eden Valentines Distract Push','Eden Shoot Sex Refuse'].includes($passage)
+|| ($passage == "Eden Bath" && $phase == 1 && C.npc.Eden.love gte 1)
+|| ($passage == "Eden Breakfast" && $phase is 2)
+|| ($passage == 'Eden Firewood Refuse' && (C.npc.Eden.love - (C.npc.Eden.lust * 2) gte 1))
+|| ($passage == 'Eden Lake Push' && (C.npc.Eden.love - C.npc.Eden.lust gte 1))>>
+    <<set $edenFace to "awkward">>
+
+<<elseif ['Eden Read Insist','Eden Valentines Bath 3','Eden Valentines Dance 2','Eden Valentines Dance','Eden Valentines Read','Eden Sweets Lick','Eden Sweets 2','Eden Collar Ask 3','Eden Collar Ask 2',"Eden Read Tease","Eden Dance",'Eden Radio Intro 2','Eden Radio Intro 3','Eden Forest Lake','Eden Forest Lake 2','Eden Lake Walk'].includes($passage) 
+|| ($passage == "Eden Bath Seduction" && $seductionrating gte $seductionrequired)
+|| ($passage == "Eden Table Seduction" && $seductionrating gte $seductionrequired)
+|| ($passage == "Eden Breakfast" && $phase is 4)>>
+    <<set $edenFace to "shy">>
+
+<<elseif (($edenDom lt C.npc.Eden.dom -1
+|| _edenPreyEvent 
+|| ['Cabin Bath Refuse','Forest Cabin Spit','Eden Firewood Refuse',"Forest Hunter Nod","Eden Story Continues","Eden Table Seduction",'Eden Spring Splash','Eden Valentines Distract','Eden Chimney'].includes($passage))
+|| (C.npc.Eden.lust gte 26 and $daily.eden.breakfastLust isnot 1 and $phase lte 2 && $daily.eden.breakfastLust && $edenBreakfastCheck && $passage == "Eden Breakfast")
+|| ($passage == 'Eden Lake Push' && !(C.npc.Eden.love - C.npc.Eden.lust gte 1))
+|| ($passage == 'Eden Shoot Rub' && C.npc.Eden.lust gte 20)
+|| ($passage == "Forest Cabin" && Time.hour lte 6 && $forestleashed is 1)
+|| ($passage == "Eden Caged" && Time.hour lte 8 &&(C.npc.Eden.trust gte 100 or $edenCaged.days gte 5)))
+&& !["Eden Breakfast"].includes($passage)
+&& (!$bathPassages.includes($passage) || Time.hour !== 17)>>
+    <<set $edenFace to "gdom">>
+
+<<else>>
+    <<set $edenFace to "default">>
+<</if>>
+
+<!--处理伊甸不同图片的差分，目前尚未实现不同场景输出不同图片-->
+<<set $edenFileName to "default">>
+
+<script>
+
+    var edenCG = document.getElementById("edenCG");
+    var scale;
+    var parentDiv = document.getElementById("parentDiv");
+    var touch = document.getElementById('touch');
+    var touchFace = document.getElementById('touchFace');
+    var touchChest = document.getElementById('touchChest');
+
+    switch(V.edenFileName) {
+        default:
+            scale = adjustScale(362,425);
+        break;
+    }
+
+    /*初始化伊甸图像*/
+    createEdenCG();
+
+    /*处理衣服*/
+    if(Time.hour == 17 || V.bathPassages.includes(V.passage) || (V.passage == 'Forest Cabin' && Time.hour <= 18 && Time.hour > 16)){
+        /*什么也没穿*/
+    }
+    else if (V.outside){
+        if(V.edencoatjacket){
+            addEdenLayer("clothes","jacket",20);
+        }
+        else{
+            addEdenLayer("clothes","outside",20);
+            /*受伤事件*/
+            if((V.edenhurt && V.edenHurtCheck && V.passage == "Eden Clearing") || ["Eden Wounds","Eden Wounds Nod","Eden Wounds Insist"].includes(V.passage)){
+                addEdenLayer("clothes","hurt",200);
+            }
+        }
+        addEdenLayer("clothes","indoor",10);
+
+        if(V.edenscarf && Time.season == "winter" && V.passage == "Eden Clearing" && Time.hour >= 11 && Time.hour <= 14 && V.daily.eden.hunting == 1 && V.edenHuntingCheck){
+            addEdenLayer("clothes","scarf",100);
+        }
+
+    }
+    else{
+        addEdenLayer("clothes","indoor",10);
+    }
+
+    /*背景前景*/
+    if(V.passage == "Forest"){
+        var background = addEdenLayer("background","unknown",-1);
+        var foreground = addEdenLayer("foreground","unknown","unset");
+        background.style.transform = "scale("+scale+")";
+        background.style.transformOrigin = "top left";
+        foreground.style.transform = "scale("+scale+")";
+        foreground.style.transformOrigin = "top left";
+        foreground.style.userSelect = "none";
+        foreground.style.pointerEvents = "none";
+        background.style.userSelect = "none";
+        background.style.pointerEvents = "none";
+        parentDiv.appendChild(foreground);
+        parentDiv.appendChild(background);
+        edenCG.style.filter = "brightness(10%)";
+    }
+    else{
+        addEdenLayer("background",V.edenFace,0);
+        addEdenLayer("foreground","default",1000);
+    }
+
+    /*触摸效果*/
+    var edenFace = document.getElementById("edenFace");
+    var originalSrc = "img/misc/edenCG/"+ V.edenFileName +"/face/" + V.edenFace + ".png";
+
+    if(!["angry","terrible"].includes(V.edenFace)&&V.passage !== "Forest"){
+        touchEvent(touchChest, "shy");
+        touchEvent(touchFace, "confuse");
+    }
+
+    /*眨眼效果*/
+    if(V.edenFace !== "terrible"){
+       startCloseEyeTimer();
+    }
+
+    /*让伊甸出现*/
+    if(
+        !(
+            /*室外*/
+            (V.outsidePassages.includes(V.passage)&&((Time.hour >= 11 && Time.hour <= 14 && V.daily.eden.hunting && V.edenHuntingCheck)||((Time.hour < 11 && Time.hour >= 9)||(Time.hour > 14 && Time.hour < 17))))
+            
+            /*室内*/
+            ||(V.indoorPassages.includes(V.passage)&&(Time.hour > 16 || Time.hour < 9)&&((!V.edenbed)||(V.edenBedCheck && V.edenbed)||(Time.hour <= 8 && Time.hour > 6)))
+
+            /*无视时间条件*/
+            || ['Eden Forest Lake','Eden Forest Lake 2','Eden View','Eden Lake','Eden Stand',"Eden Take Hand" ,'Eden Lake Walk','Eden Lake Push','Eden Lake Raft','Eden Firewood Refuse','Eden Christmas Turn','Eden Wounds Insist','Eden Wounds','Eden Wounds No Kiss','Eden Wounds Nod','Eden Wounds Finish','Eden Wounds Relent','Eden Collar','Eden Collar Ask 2','Eden Collar Ask 3','Eden Valentines Dance','Eden Valentines Relax','Eden Valentines Listen','Eden Valentines Dance 2','Eden Valentines Dance 3','Eden Valentines Book','Eden Valentines Book 2','Eden Valentines Book 3','Eden Valentines Read','Eden Valentines Distract','Eden Valentines Distract Push','Eden Valentines Push','Eden Shoot Rub','Eden Shoot Focus','Eden Shoot First Focus','Eden Shoot','Eden Shoot Ask','Eden Shoot Sex Refuse','Eden Sweets Lick','Eden Sweets Lick Refuse','Eden Sweets 6','Eden Sweets 2','Eden Sweets Pull Away','Eden Sweets','Eden Carve','Eden Carve 2','Eden Carve 3','Eden Carve 4','Eden Carve 5','Eden Chimney','Eden Chimney Push','Eden Christmas Meal 4','Eden Christmas Meal 3','Eden Christmas Meal 2','Eden Christmas Meal','Eden Coat Stand',"Eden Table Seduction",'Eden Caged Intro','Eden Caged Evening','Eden Lake Push',"Eden Lake","Eden Lake Walk",'Eden Lake Raft',"Forest","Forest Hunter Intro","Forest Hunter Refuse","Eden Cuddle","Eden Cuddle Talk","Eden Pillows","Eden Breakfast",'Eden Caged Caught','Eden Caged Caught Pull',"Eden Wounds","Eden Wounds Nod","Eden Wounds Insist"].includes(V.passage)
+            || V.bathPassages.includes(V.passage)
+            || !(V.indoorPassages.includes(V.passage) || V.outsidePassages.includes(V.passage))
+        )
+    ){
+        parentDiv.style.width = 0;
+        parentDiv.style.height = 0;
+    }
+</script>
+
+<<set $edenDom to C.npc.Eden.dom -1>>
+
+<</widget>>
+
+<<widget "EdenCheck">>
+<<if !["Start","Start2"].includes(V.passage)>>
+    <<if !$edenhurt>>
+        <<set $edenHurtCheck to 1>>
+    <<else>>
+        <<set $edenHurtCheck to 0>>
+    <</if>>
+
+    <<if !$daily.eden.hunting>>
+        <<set $edenHuntingCheck to 1>>
+    <<else>>
+        <<set $edenHuntingCheck to 0>>
+    <</if>>
+
+    <<if !$edenbed>>
+        <<set $edenBedCheck to 1>>
+    <<else>>
+        <<set $edenBedCheck to 0>>
+    <</if>>
+
+    <<if !$hunterintro>>
+        <<set $hunterIntroCheck to 1>>
+    <<else>>
+        <<set $hunterIntroCheck to 0>>
+    <</if>>
+
+    <<if !$daily.eden.breakfastLust>>
+        <<set $edenBreakfastCheck to 1>>
+    <<else>>
+        <<set $edenBreakfastCheck to 0>>
+    <</if>>
+
+    <<if $edenPreyEscaped>>
+        <<set $edenPreyEscapedCheck to 1>>
+    <<else>>
+        <<set $edenPreyEscapedCheck to 0>>
+    <</if>>
+    
+    <<if $edendays>>
+        <<set $edendaysCheck to $edendays>>
+    <</if>>
+<</if>>
+<</widget>>
+
+<<widget "scaleSetting">>
+   <span class = "gold" style = "font-size: 1.3em;font-weight: bold;">设定伊甸头像的缩放大小</span><br>
+   <div class="slider-container" id="slider">
+        <div class="slider-thumb" id="thumb"></div>
+    </div><br>
+    <div class="value-display" id="value">当前缩放为 0.5 倍</div>
+
+    <script>
+        var slider = document.getElementById('slider');
+        var thumb = document.getElementById('thumb');
+        var valueDisplay = document.getElementById('value');
+
+        var sliderWidth = slider.offsetWidth;
+        var minValue = 0.1;
+        var maxValue = 1.0;
+
+        var initialValue = Number(V.scaleValue)  || 0.5;
+        var initialX = ((initialValue - minValue) / (maxValue - minValue)) * sliderWidth;
+        thumb.style.left = `${initialX}px`;
+        valueDisplay.innerText = `当前缩放为 ${initialValue.toFixed(2)} 倍`;
+
+        function updateValueDisplay(x) {
+    if (x < 0) x = 0;
+    if (x > sliderWidth) x = sliderWidth;
+
+    var value = minValue + (maxValue - minValue) * (x / sliderWidth);
+    if (typeof value === "number" && !isNaN(value)) {
+        valueDisplay.innerText = `当前缩放为 ${value.toFixed(2)} 倍`;
+        V.scaleValue = value.toFixed(2);
+    } else {
+        valueDisplay.innerText = "计算错误";
+        console.error("Value is not a valid number:", value);
+    }
+}
+
+
+        thumb.onmousedown = function (event) {
+            event.preventDefault();
+            document.onmousemove = function (e) {
+                var sliderRect = slider.getBoundingClientRect();
+                var x = e.clientX - sliderRect.left;
+
+                if (x < 0) x = 0;
+                if (x > sliderWidth) x = sliderWidth;
+
+                thumb.style.left = `${x}px`;
+                updateValueDisplay(x);
+            };
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+
+        thumb.ontouchstart = function (event) {
+            document.ontouchmove = function (e) {
+                var sliderRect = slider.getBoundingClientRect();
+                var x = e.touches[0].clientX - sliderRect.left;
+
+                if (x < 0) x = 0;
+                if (x > sliderWidth) x = sliderWidth;
+
+                thumb.style.left = `${x}px`;
+                updateValueDisplay(x);
+            };
+
+            document.ontouchend = function () {
+                document.ontouchmove = null;
+                document.ontouchend = null;
+            };
+        };
+
+    </script>
+    <<link [[确认|$passage]]>><</link>>
+<</widget>>
+
+<<widget "edenCGNoDiff">>
+    <div id = "parentDiv">
+        <div id = "edenCG"></div>
+    </div>
+
+    <script>
+        var edenCG = document.getElementById("edenCG");
+        var parentDiv = document.getElementById("parentDiv");
+        var scale = adjustScale(539,282);
+        var width;
+
+        if ((V.passage == "Cabin Sleep" && T.sleepinterrupt && !T.dryheaving) || (V.passage == "Eden Sleep Push" && !(C.npc.Eden.love - (C.npc.Eden.lust * 2) >= 1))){
+            width = 1078;
+            
+            V.edenFileName = "night";
+            createEdenCGNoDiff(true,true);
+            createAnimation(200,"heart");
+            createAnimation(1500,"breathe");
+            scale = adjustScale(539,282);
+        }
+        else if(["Eden Wounds Kiss"].includes(V.passage)){
+            width = 745;
+            V.edenFileName = "wound";
+            createEdenCGNoDiff(true,true);
+            scale = adjustScale(372,327);
+        }
+        else{
+            parentDiv.style.width = 0;
+            parentDiv.style.height = 0;
+        }
+        
+    </script>
+<</widget>>

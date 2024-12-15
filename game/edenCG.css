@@ -1,0 +1,161 @@
+#edenCG{
+    transform: scale(0.5);
+    transform-origin: top left;
+    width: 725px;
+    height: 850px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    position: absolute;
+    image-rendering: smooth;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.edenLayer{
+    position: absolute;
+    z-index: 1;
+}
+
+#parentDiv{
+    width: 362px;
+    height: 425px;
+    position: relative;
+    overflow: hidden;
+}
+
+#touch_default{
+    cursor: pointer;
+    position: absolute;
+}
+
+#touchFace_default{
+    width: 100px;
+    height: 120px;
+    left: 120px;
+    position: absolute;
+    top: 20px;
+}
+
+#touchChest_default{
+    width: 150px;
+    height: 100px;
+    left: 80px;
+    position: absolute;
+    top: 190px;
+}
+
+.slider-container {
+    width: 300px;
+    height: 10px;
+    background: #ddd;
+    position: relative;
+    margin: 50px auto;
+    border-radius: 5px;
+    float: left;
+}
+
+.slider-thumb {
+    width: 20px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    position: absolute;
+    top: -10px;
+    cursor: pointer;
+    box-shadow: 0 0 5px #00000078;
+}
+
+.value-display {
+    font-size: 1.2em;
+    clear: left;
+}
+
+.closeEye{
+    position: absolute;
+    z-index: 3;
+}
+
+.animation{
+    position: absolute;
+    z-index: 1100;
+}
+
+/* pc */
+:root {
+    --pc_hair_color: #000;
+    --pc_lefteye_color: #000;
+    --pc_righteye_color: #000;
+    --pc_shirt_color: #000;
+    --width: 1078;
+}
+
+#pcCG {
+	position: absolute;
+	width: calc(var(--width)*1px);
+	height: 564px;
+    overflow: hidden;
+}
+
+.pc_hair_color_cover {
+    transform: translateX(-100%);
+    filter: drop-shadow(calc(var(--width)*1px) 0 var(--pc_hair_color));
+    z-index: 22;
+    mix-blend-mode: overlay;
+    position: absolute;
+}
+
+.pc_lefteye_color_cover {
+    transform: translateX(-100%);
+    filter: drop-shadow(calc(var(--width)*1px) 0 var(--pc_lefteye_color));
+    z-index: 20;
+    mix-blend-mode: overlay;
+    position: absolute;
+}
+
+.pc_righteye_color_cover {
+    transform: translateX(-100%);
+    filter: drop-shadow(calc(var(--width)*1px) 0 var(--pc_righteye_color));
+    z-index: 20;
+    mix-blend-mode: overlay;
+    position: absolute;
+}
+
+.pc_shirt_color_cover {
+    transform: translateX(-100%);
+    filter: drop-shadow(calc(var(--width)*1px) 0 var(--pc_shirt_color));
+    z-index: 20;
+    mix-blend-mode: overlay;
+    position: absolute;
+}
+
+.pc_body{
+    position: absolute;
+    z-index: 15;
+}
+
+.pc_left_eye{
+    position: absolute;
+    z-index: 19;
+}
+
+.pc_right_eye{
+    position: absolute;
+    z-index: 19;
+}
+
+.pc_shirt{
+    position: absolute;
+    z-index: 19;
+}
+
+.pc_hair{
+    position: absolute;
+    z-index: 21;
+    isolation: isolate;
+}
