@@ -28,7 +28,8 @@
 
 致谢：
 
-* <b>图像作者：</b>
+* <b>图像作者：削削薯片</b>
+![image](https://github.com/LooopSpiner/Eden-Visuals-Mod/blob/main/mdImages/06.png)
 * 模组群内提供帮助的群友
 * 杰哥开发的sc2 modloader（超厉害的）
 * 狐狐的简易框架（也超厉害的）
