@@ -159,3 +159,10 @@
     z-index: 21;
     isolation: isolate;
 }
+
+.pc_shadow{
+    position: absolute;
+    z-index: 23;
+    mix-blend-mode: multiply;
+    isolation: isolate;
+}

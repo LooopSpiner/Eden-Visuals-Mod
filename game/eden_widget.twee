@@ -53,7 +53,7 @@
 <<elseif ["Eden Bath Join"].includes($passage)>>
     <<set $edenFace to "raisedEyebrows">>
 
-<<elseif ['Cabin Leash Broken',"Eden Pillows",'Eden Christmas Meal 2','Eden Christmas Turn','Eden Freedom','Eden Radio Intro','Eden Carve','Eden Carve 5','Eden Shoot Ask','Eden Search'].includes($passage)
+<<elseif ['Eden Wounds Salve'，'Cabin Leash Broken',"Eden Pillows",'Eden Christmas Meal 2','Eden Christmas Turn','Eden Freedom','Eden Radio Intro','Eden Carve','Eden Carve 5','Eden Shoot Ask','Eden Search'].includes($passage)
 || ($passage == "Eden Bath 2" && !$phase)
 || ($passage == "Eden Breakfast" && $phase is 0 && !$housekeepingSuccess && $daily.eden.breakfastLust)
 || ($passage == "Eden Lake" && !$exposed gte 1 && $edenraftintro is 1)>>
@@ -72,8 +72,7 @@
 || ($passage == "Eden Breakfast" && $phase is 4)>>
     <<set $edenFace to "shy">>
 
-<<elseif (($edenDom lt C.npc.Eden.dom -1
-|| _edenPreyEvent 
+<<elseif ((_edenPreyEvent 
 || ['Cabin Bath Refuse','Forest Cabin Spit','Eden Firewood Refuse',"Forest Hunter Nod","Eden Story Continues","Eden Table Seduction",'Eden Spring Splash','Eden Valentines Distract','Eden Chimney'].includes($passage))
 || (C.npc.Eden.lust gte 26 and $daily.eden.breakfastLust isnot 1 and $phase lte 2 && $daily.eden.breakfastLust && $edenBreakfastCheck && $passage == "Eden Breakfast")
 || ($passage == 'Eden Lake Push' && !(C.npc.Eden.love - C.npc.Eden.lust gte 1))
@@ -189,8 +188,6 @@
         parentDiv.style.height = 0;
     }
 </script>
-
-<<set $edenDom to C.npc.Eden.dom -1>>
 
 <</widget>>
 

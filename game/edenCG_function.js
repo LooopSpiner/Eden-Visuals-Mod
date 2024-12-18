@@ -252,8 +252,7 @@ function createPCimgsCG(fileName) {
     var basePath = "img/misc/edenCG/" + V.edenFileName +"/pc";
     var imgElement = document.createElement("img");
     var className = "pc_" + fileName;
-    if(fileName == "hair"){
-        var hairlength;
+    var hairlength;
         switch (V.hairlengthstage){
             case "short":
                 hairlength = "short";
@@ -274,7 +273,12 @@ function createPCimgsCG(fileName) {
                 hairlength = "feet";
             break;
         };
+    if(fileName == "hair"){
+       
         imgElement.setAttribute("src", basePath + "/" + hairlength + ".png");
+    }
+    else if(fileName == "shadow"){
+        imgElement.src = basePath + "/shadow_" + hairlength +".png";
     }
     else{
         imgElement.setAttribute("src", basePath + "/" + fileName + ".png");
@@ -288,6 +292,7 @@ var pc_hair = createPCimgsCG("hair");
 var pc_left_eye = createPCimgsCG("left_eye");
 var pc_right_eye = createPCimgsCG("right_eye");
 var pc_shirt = createPCimgsCG("shirt");
+var pc_shadow = createPCimgsCG("shadow");
 
 /*染色 */
 var lil_pc_hair_color = getColorCG(setup.colours.hair, V.haircolour);
@@ -312,7 +317,7 @@ var lil_pc_hair_color = getColorCG(setup.colours.hair, V.haircolour);
 
 var lil_pc_upper_color = resolveClothColorCG(V.worn.upper);
 
-var pc_all_imgs = [pc_body,pc_hair,pc_left_eye,pc_right_eye];
+var pc_all_imgs = [pc_body,pc_hair,pc_left_eye,pc_right_eye,pc_shadow];
 
 function createColorCoverCG(element, className, colorProperty, colorValue) {
     var clone = element.cloneNode();
