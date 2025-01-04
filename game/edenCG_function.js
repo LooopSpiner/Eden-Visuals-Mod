@@ -41,58 +41,83 @@ window.touchEvent = function touchEvent(part, url) {
     }
 
 
-    window.startCloseEyeTimer = (function () {
-        let timerId = null; // 用于跟踪定时器的 ID
-        
-        return function startCloseEyeTimer() {
-            if (timerId !== null) {
-                console.log("Timer already running, skipping duplicate start.");
-                return; // 如果定时器已存在，则不重复启动
+// 独立函数用于清除定时器
+window.clearCloseEyeTimer = function clearCloseEyeTimer() {
+    if (window.startCloseEyeTimer.timerId !== null) {
+        clearTimeout(window.startCloseEyeTimer.timerId);  // 清除已有的定时器
+        window.startCloseEyeTimer.timerId = null;  // 重置定时器ID
+        console.log("Timer has been cleared.");
+    }
+}
+
+// 定时器启动函数
+window.startCloseEyeTimer = (function () {
+
+    return function startCloseEyeTimer() {
+        if (timerId !== null) {
+            console.log("Timer already running, skipping duplicate start.");
+            return; // 如果定时器已存在，则不重复启动
+        }
+
+        function executeTask() {
+            // 根据条件确定 eye 的值
+            let eye;
+            if (!["angry", "gdom"].includes(V.edenFace)) {
+                eye = "close_" + C.npc.Eden.skincolour;
+            } else {
+                eye = "close_angry";
             }
-    
-            function executeTask() {
-                // 根据条件确定 eye 的值
-                let eye;
-                if (!["angry", "gdom"].includes(V.edenFace)) {
-                    eye = "close_" + C.npc.Eden.skincolour;
-                } else {
-                    eye = "close_angry";
-                }
-    
-                // 添加 closeEye 元素
-                const closeEye = addEdenLayer(V.edenFileName + "/face", eye, -1);
-    
-                // 请求图片并设置图片源
-                window.modSC2DataManager.getHtmlTagSrcHook().requestImageBySrc("img/misc/edenCG/" + V.edenFileName + "/face/" + eye + ".png")
-                    .then(base64Img => {
-                        closeEye.src = base64Img;
-    
-                        // 确保图片加载完毕后再设置类名
-                        closeEye.onload = () => {
-                            closeEye.className = "closeEye";
-                            closeEye.style.zIndex = "3";
-                        };
-                    }).catch(err => {
-                        console.error("Error loading image:", err);
-                    });
-    
-                // 700ms 后删除所有 class 为 closeEye 的元素
-                setTimeout(() => {
-                    const elements = document.querySelectorAll(".closeEye"); // 获取所有 closeEye 元素
-                    elements.forEach(element => {
-                        if (element && typeof element.remove === "function") {
-                            element.remove(); // 删除元素
-                        }
-                    });
-                }, 700);
-    
-                timerId = setTimeout(executeTask, 6000);
+
+            // 确保生成的 eye 路径有效
+            const imagePath = "img/misc/edenCG/" + V.edenFileName + "/face/" + eye + ".png";
+            if (["dance","wound","night",'breakfast'].includes(V.edenFileName)|| !V.edenFileName || !eye || !imagePath) {
+                console.error("哎呀好烦，真的不想修定时器了T T");
+                return; // 如果路径无效，则直接返回
             }
-    
-            // 开始第一次任务
-            executeTask();
-        };
-    })();
+
+            // 添加 closeEye 元素
+            const closeEye = addEdenLayer(V.edenFileName + "/face", eye, -1);
+
+            // 请求图片并设置图片源
+            window.modSC2DataManager.getHtmlTagSrcHook().requestImageBySrc(imagePath)
+                .then(base64Img => {
+                    if (!base64Img || base64Img === "undefined") {
+                        console.error("哎呀好烦，真的不想修定时器了T T");
+                        clearCloseEyeTimer(); // 如果图片源无效，则清除定时器
+                        return;
+                    }
+
+                    closeEye.src = base64Img;
+
+                    // 确保图片加载完毕后再设置类名
+                    closeEye.onload = () => {
+                        closeEye.className = "closeEye";
+                        closeEye.style.zIndex = "3";
+                    };
+                }).catch(err => {
+                    console.error("Error loading image:", err);
+                    clearCloseEyeTimer(); // 如果加载图片失败，则清除定时器
+                });
+
+            // 700ms 后删除所有 class 为 closeEye 的元素
+            setTimeout(() => {
+                const elements = document.querySelectorAll(".closeEye"); // 获取所有 closeEye 元素
+                elements.forEach(element => {
+                    if (element && typeof element.remove === "function") {
+                        element.remove(); // 删除元素
+                    }
+                });
+            }, 700);
+
+            // 设定下一次任务
+            timerId = setTimeout(executeTask, 6000);
+        }
+
+        // 开始第一次任务
+        executeTask();
+    };
+})();
+
      
 
 // 用于生成没有差分的图片
@@ -119,14 +144,14 @@ window.createEdenCGNoDiff = function createEdenCGNoDiff(pcExist,edenExist){
 // 处理图片缩放
 window.adjustScale = function adjustScale(width,height){
     var scale = V.scaleValue || 0.5;
-    document.getElementById("edenCG").style.transform = "scale(" + scale +")";
-
-    var parentDiv = document.getElementById("parentDiv");
+    if(parentDiv){
     parentDiv.style.width = width*scale*2 + "px";
-    parentDiv.style.height = height*scale*2 + "px";
+    parentDiv.style.height = height*scale*2 + "px";}
 
+    if(edenCG)
     edenCG.style.width = width*2 + "px";
     edenCG.style.height = height*2 + "px";
+    edenCG.style.transform = "scale(" + scale +")";
 
     var pcCG = document.getElementById("pcCG");
     if(pcCG){
@@ -188,7 +213,6 @@ window.createAnimation = function createAnimation(frameDelay, frame) {
 window.createPC = function createPC() {
    
     window.modImgLoaderHooker.addDynamicImageTagReplacePassage(V.passage);
-var edenCG = document.getElementById("edenCG");
 
 function appendPC(){
     function HSVtoRGB(h, s, v) {
@@ -252,47 +276,33 @@ function createPCimgsCG(fileName) {
     var basePath = "img/misc/edenCG/" + V.edenFileName +"/pc";
     var imgElement = document.createElement("img");
     var className = "pc_" + fileName;
-    var hairlength;
-        switch (V.hairlengthstage){
-            case "short":
-                hairlength = "short";
-            break;
-            case "shoulder":
-                hairlength = "short";
-            break;
-            case "chest":
-                hairlength = "middle";
-            break;
-            case "navel":
-                hairlength = "middle";
-            break;
-            case "thighs":
-                hairlength = "long";
-            break;
-            default:
-                hairlength = "feet";
-            break;
-        };
+    const breast =  Math.floor(V.player.breastsize/2);
+
     if(fileName == "hair"){
-       
+        var hairlength = V.hairlengthstage;
         imgElement.setAttribute("src", basePath + "/" + hairlength + ".png");
     }
-    else if(fileName == "shadow"){
-        imgElement.src = basePath + "/shadow_" + hairlength +".png";
+    else if(fileName =='breast'){
+        imgElement.src = basePath + '/' + breast +'.png';
+    }
+    else if(fileName == 'shirt'||fileName == 'acc'){
+        imgElement.src = basePath + '/'+fileName+'_' + breast +'.png';
     }
     else{
         imgElement.setAttribute("src", basePath + "/" + fileName + ".png");
     }
     imgElement.setAttribute("class", className);
+    imgElement.style.position = 'absolute';
     return imgElement;
 };
 
 var pc_body = createPCimgsCG("body");
+var pc_breast = createPCimgsCG("breast");
 var pc_hair = createPCimgsCG("hair");
 var pc_left_eye = createPCimgsCG("left_eye");
 var pc_right_eye = createPCimgsCG("right_eye");
 var pc_shirt = createPCimgsCG("shirt");
-var pc_shadow = createPCimgsCG("shadow");
+var pc_acc = createPCimgsCG("acc");
 
 /*染色 */
 var lil_pc_hair_color = getColorCG(setup.colours.hair, V.haircolour);
@@ -317,7 +327,7 @@ var lil_pc_hair_color = getColorCG(setup.colours.hair, V.haircolour);
 
 var lil_pc_upper_color = resolveClothColorCG(V.worn.upper);
 
-var pc_all_imgs = [pc_body,pc_hair,pc_left_eye,pc_right_eye,pc_shadow];
+var pc_all_imgs = [pc_body,pc_hair,pc_left_eye,pc_right_eye,pc_breast,pc_acc];
 
 function createColorCoverCG(element, className, colorProperty, colorValue) {
     var clone = element.cloneNode();

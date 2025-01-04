@@ -1,4 +1,4 @@
-#edenCG{
+#edenCG,#noDiffCG{
     transform: scale(0.5);
     transform-origin: top left;
     width: 725px;
@@ -22,7 +22,7 @@
     z-index: 1;
 }
 
-#parentDiv{
+#parentDiv,#noDiffDiv{
     width: 362px;
     height: 425px;
     position: relative;
@@ -99,7 +99,6 @@
 	position: absolute;
 	width: calc(var(--width)*1px);
 	height: 564px;
-    overflow: hidden;
 }
 
 .pc_hair_color_cover {
@@ -159,10 +158,13 @@
     z-index: 21;
     isolation: isolate;
 }
-
-.pc_shadow{
+.pc_acc{
     position: absolute;
     z-index: 23;
-    mix-blend-mode: multiply;
+    isolation: isolate;
+}
+.pc_breast{
+    position: absolute;
+    z-index: 16;
     isolation: isolate;
 }

@@ -4,6 +4,7 @@
 <<set $outsidePassages to ['Eden Clearing','Clearing Weeding','Clearing Eden Actions','Eden Porch','Clearing Spring','Eden Plots','Clearing Fondle','Eden Lunch',"Eden Shoot","Eden Shoot First Focus","Eden Shoot Focus"]>>
 <<set $indoorPassages to ["Forest Hunter Refuse" ,"Forest Hunter Nod","Forest Hunter Intro",'Eden Cabin','Eden Bath 2','Eden Bath','Eden Bath Wash No','Eden Bath Wash','Eden Breakfast','Eden Breakfast 2','Eden Dinner','Eden Christmas Meal 2','Eden Read','Eden Read Tease','Eden Table','Eden Cabin Bed','Cabin Sleep','Eden Mirror','Eden Caged Intro','Eden Caged','Eden Caged Caught','Eden Caged Evening','Eden Sleep Push','Cabin Eden Actions','Eden Cuddle','Eden Cuddle Talk','Eden Cuddle Trauma Talk','Eden Caged Breakfast','Eden Caged Escape','Eden Caged Freedom','Eden Dance','Eden Wounds','Eden Wounds Insist','Eden Wounds Finish','Eden Cuddle Trauma Honest','Eden Cuddle Trauma Honest 2','Eden Cuddle Trauma Honest 3']>>
 <<set $bathPassages to ['Cabin Bath Refuse','Cabin Bath','Eden Valentines Wash','Eden Valentines Bath','Eden Valentines Bath 2','Eden Valentines Bath 3','Eden Valentines Wash Nod','Eden Valentines Relax','Eden Spring','Eden Spring Intro','Eden Spring Intro Cuddle 2','Eden Spring Intro 2','Eden Spring 2','Eden Spring Intro 3','Eden Spring Splash','Eden Spring Intro Cuddle','Eden Spring Seduce',"Eden Bath Wash No","Eden Bath","Eden Bath 2","Eden Bath Wash","Eden Bath Wash Intro","Eden Bath Wash Intro 2","Eden Bath Wash Intro 3","Eden Bath Join","Eden Bath Seduction"]>>
+<<set $dancePassages to ['Eden Dance','Eden Valentines Dance','Eden Valentines Dance 2','Eden Valentines Dance 3','Eden Dance Seduce','Eden Radio Intro','Eden Radio Intro 2','Eden Radio Intro 3','Eden Radio Intro 4']>>
 
 <div id = "parentDiv">
     <div id = "touch">
@@ -53,7 +54,7 @@
 <<elseif ["Eden Bath Join"].includes($passage)>>
     <<set $edenFace to "raisedEyebrows">>
 
-<<elseif ['Eden Wounds Salve'，'Cabin Leash Broken',"Eden Pillows",'Eden Christmas Meal 2','Eden Christmas Turn','Eden Freedom','Eden Radio Intro','Eden Carve','Eden Carve 5','Eden Shoot Ask','Eden Search'].includes($passage)
+<<elseif ['Eden Wounds Salve','Cabin Leash Broken',"Eden Pillows",'Eden Christmas Meal 2','Eden Christmas Turn','Eden Freedom','Eden Radio Intro','Eden Carve','Eden Carve 5','Eden Shoot Ask','Eden Search'].includes($passage)
 || ($passage == "Eden Bath 2" && !$phase)
 || ($passage == "Eden Breakfast" && $phase is 0 && !$housekeepingSuccess && $daily.eden.breakfastLust)
 || ($passage == "Eden Lake" && !$exposed gte 1 && $edenraftintro is 1)>>
@@ -74,7 +75,6 @@
 
 <<elseif ((_edenPreyEvent 
 || ['Cabin Bath Refuse','Forest Cabin Spit','Eden Firewood Refuse',"Forest Hunter Nod","Eden Story Continues","Eden Table Seduction",'Eden Spring Splash','Eden Valentines Distract','Eden Chimney'].includes($passage))
-|| (C.npc.Eden.lust gte 26 and $daily.eden.breakfastLust isnot 1 and $phase lte 2 && $daily.eden.breakfastLust && $edenBreakfastCheck && $passage == "Eden Breakfast")
 || ($passage == 'Eden Lake Push' && !(C.npc.Eden.love - C.npc.Eden.lust gte 1))
 || ($passage == 'Eden Shoot Rub' && C.npc.Eden.lust gte 20)
 || ($passage == "Forest Cabin" && Time.hour lte 6 && $forestleashed is 1)
@@ -92,15 +92,16 @@
 
 <script>
 
-    var edenCG = document.getElementById("edenCG");
     var scale;
+    var edenCG = document.getElementById("edenCG");
     var parentDiv = document.getElementById("parentDiv");
     var touch = document.getElementById('touch');
     var touchFace = document.getElementById('touchFace');
     var touchChest = document.getElementById('touchChest');
+    var timerId = null;
 
     switch(V.edenFileName) {
-        default:
+        case 'default':
             scale = adjustScale(362,425);
         break;
     }
@@ -109,7 +110,7 @@
     createEdenCG();
 
     /*处理衣服*/
-    if(Time.hour == 17 || V.bathPassages.includes(V.passage) || (V.passage == 'Forest Cabin' && Time.hour <= 18 && Time.hour > 16)){
+    if((Time.hour == 17 || V.bathPassages.includes(V.passage) || (V.passage == 'Forest Cabin' && Time.hour <= 18 && Time.hour > 16)) && (V.outsidePassages.concat(V.indoorPassages,V.bathPassages,V.dancePassages).includes(V.passage))){
         /*什么也没穿*/
     }
     else if (V.outside){
@@ -172,7 +173,8 @@
     /*让伊甸出现*/
     if(
         !(
-            /*室外*/
+            (
+                /*室外*/
             (V.outsidePassages.includes(V.passage)&&((Time.hour >= 11 && Time.hour <= 14 && V.daily.eden.hunting && V.edenHuntingCheck)||((Time.hour < 11 && Time.hour >= 9)||(Time.hour > 14 && Time.hour < 17))))
             
             /*室内*/
@@ -182,10 +184,17 @@
             || ['Eden Forest Lake','Eden Forest Lake 2','Eden View','Eden Lake','Eden Stand',"Eden Take Hand" ,'Eden Lake Walk','Eden Lake Push','Eden Lake Raft','Eden Firewood Refuse','Eden Christmas Turn','Eden Wounds Insist','Eden Wounds','Eden Wounds No Kiss','Eden Wounds Nod','Eden Wounds Finish','Eden Wounds Relent','Eden Collar','Eden Collar Ask 2','Eden Collar Ask 3','Eden Valentines Dance','Eden Valentines Relax','Eden Valentines Listen','Eden Valentines Dance 2','Eden Valentines Dance 3','Eden Valentines Book','Eden Valentines Book 2','Eden Valentines Book 3','Eden Valentines Read','Eden Valentines Distract','Eden Valentines Distract Push','Eden Valentines Push','Eden Shoot Rub','Eden Shoot Focus','Eden Shoot First Focus','Eden Shoot','Eden Shoot Ask','Eden Shoot Sex Refuse','Eden Sweets Lick','Eden Sweets Lick Refuse','Eden Sweets 6','Eden Sweets 2','Eden Sweets Pull Away','Eden Sweets','Eden Carve','Eden Carve 2','Eden Carve 3','Eden Carve 4','Eden Carve 5','Eden Chimney','Eden Chimney Push','Eden Christmas Meal 4','Eden Christmas Meal 3','Eden Christmas Meal 2','Eden Christmas Meal','Eden Coat Stand',"Eden Table Seduction",'Eden Caged Intro','Eden Caged Evening','Eden Lake Push',"Eden Lake","Eden Lake Walk",'Eden Lake Raft',"Forest","Forest Hunter Intro","Forest Hunter Refuse","Eden Cuddle","Eden Cuddle Talk","Eden Pillows","Eden Breakfast",'Eden Caged Caught','Eden Caged Caught Pull',"Eden Wounds","Eden Wounds Nod","Eden Wounds Insist"].includes(V.passage)
             || V.bathPassages.includes(V.passage)
             || !(V.indoorPassages.includes(V.passage) || V.outsidePassages.includes(V.passage))
+            )
+            && !(C.npc.Eden.lust >= 26 && V.phase <= 2 && V.daily.eden.breakfastLust && V.edenBreakfastCheck && V.passage == "Eden Breakfast" )
         )
     ){
-        parentDiv.style.width = 0;
-        parentDiv.style.height = 0;
+        parentDiv.style.display = "none";
+        document.getElementById("edenCG").style.display = "none";
+        
+        var noDiffDiv = document.getElementById("noDiffDiv");
+        if(noDiffDiv){
+            noDiffDiv.style.display = "block";
+        }
     }
 </script>
 
@@ -313,15 +322,16 @@
 <</widget>>
 
 <<widget "edenCGNoDiff">>
-    <div id = "parentDiv">
-        <div id = "edenCG"></div>
+    <div id = "noDiffDiv">
+        <div id = "noDiffCG"></div>
     </div>
 
     <script>
-        var edenCG = document.getElementById("edenCG");
-        var parentDiv = document.getElementById("parentDiv");
+        var edenCG = document.getElementById("noDiffCG");
+        var parentDiv = document.getElementById("noDiffDiv");
         var scale = adjustScale(539,282);
         var width;
+        var timerId = "no_timer";
 
         if ((V.passage == "Cabin Sleep" && T.sleepinterrupt && !T.dryheaving) || (V.passage == "Eden Sleep Push" && !(C.npc.Eden.love - (C.npc.Eden.lust * 2) >= 1))){
             width = 1078;
@@ -338,9 +348,26 @@
             createEdenCGNoDiff(true,true);
             scale = adjustScale(372,327);
         }
+        else if(V.dancePassages.includes(V.passage)){
+            width = 744;
+            V.edenFileName = "dance";
+            createEdenCGNoDiff(true,true);
+            scale = adjustScale(372,326);
+        }
+        else if((C.npc.Eden.lust >= 26 && V.phase <= 2 && V.daily.eden.breakfastLust && V.edenBreakfastCheck && V.passage == "Eden Breakfast" )||(!(C.npc.Eden.love - (C.npc.Eden.lust * 2) >= 1) && V.passage == 'Eden Breakfast Push')){
+            width = 1078;
+            
+            V.edenFileName = "breakfast";
+            createEdenCGNoDiff(true,true);
+            createAnimation(200,"heart");
+            scale = adjustScale(539,282);
+        }
         else{
-            parentDiv.style.width = 0;
-            parentDiv.style.height = 0;
+            parentDiv.style.display = "none";
+            var originalDiv = document.getElementById('parentDiv');
+            if(originalDiv){
+                originalDiv.style.display = 'block';
+            }
         }
         
     </script>
